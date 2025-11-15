@@ -1,0 +1,18 @@
+Question 5: Typo in Button Text
+
+1. Would you report it? Why or why not?
+Yes, I would report it.
+Why Report:
+1.Defect Classification: A typo is a legitimate defect, specifically a cosmetic/text defect. While it is not a functional blocker.
+2.Consistency: If the button text is inconsistent with standard English spelling, it sets a poor precedent.
+3.Designer's Role: The designer's insistence does not override the standard of quality. The designer may be mistaken.
+
+How to Report: The bug would be reported with a Low or Minor priority but it would still be formally logged in the bug tracking system.
+
+2. Suggest a systematic approach to catch similar issues across the application.
+1.Integration and Spell Checkers in Development: Implement code linting tools that include spell-checking capabilities for strings.
+2.Automated Content Scanning: Integrate a headless browser into the Continuous Integration (CI) pipeline. Any identified errors would automatically generate a bug report or fail the build.
+3.Localization Testing: a single-language application, treat the text as a localization file. Ensure all user-facing strings are extracted into a resource file. This also prevents developers from hardcoding text with potential errors.
+
+
+

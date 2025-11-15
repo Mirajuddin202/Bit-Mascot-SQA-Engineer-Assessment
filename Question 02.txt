@@ -1,0 +1,49 @@
+1. What type of bug is this?
+This is a Data Persistence and Session Management bug.It indicates that the shopping cart data is being stored as a client-side session variable.
+
+2. How would you reproduce it step by step?
+Step:01
+Title: Log in a valid user account.
+Expected Result: User is authenticated.
+Actual Result: User is authenticated.
+
+Step:02
+Title: Navigate to a product page.
+Expected Result: Cart updates to the added items.
+Actual Result: Cart is updates.
+
+Step:03
+Title: Verify on the cart page.
+Expected Result: Items are present.
+Actual Result: Items are present.
+
+
+Step:04
+Title: Click the "Log Out" button.
+Expected Result: User session is terminated.
+Actual Result: User session is terminated, cart data is not saved to the database.
+
+Step:05
+Title: Using the same user account.
+Expected Result: The system saved cart data from the database.
+Actual Result: The system an empty cart.
+
+Step:06
+Title: Navigate to the cart page.
+Expected Result: items are still in the cart.
+Actual Result: The cart is empty.
+
+3. Suggest one solution or workaround the development team could implement.
+Solution: Implement Server-Side Cart Merging Logic
+
+1.Cart Storage: When a user is logged out, store the cart data in a database record.
+
+2.Login Event Trigger: Upon a successful login, the system must execute a cart merging function:
+Check if a cart exists.
+Check if the user already has a persistent cart associated with their User ID.
+Clear: Delete the anonymous cart data.
+
+4. What additional tests would you perform to prevent similar issues elsewhere?
+1.Data Integrity Tests: Verify that changes to a user's profile persist correctly after logging out and logging back in.
+
+2.Session Timeout Tests: Leave the application idle until the session times out. When the user is prompted to log in again and verify that any unsaved data is either preserved.

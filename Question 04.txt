@@ -1,0 +1,30 @@
+Question 4: Dynamic Chart Loading Issue
+
+1. How would you investigate the issue?
+1.Replication and Scope Definition: Attempt to reproduce the issue across different browsers and devices if it's client-specific. Check the bug tracking system for similar, previously reported issues.
+2.Log Analysis: Examine server-side logs for the time window when the user reported the freeze. 
+3.Real-Time Monitoring: Use browser developer tools to monitor the network activity.
+
+2. Which tools or techniques would you use to debug?
+1. API Testing Tools: Postman
+2. Developer Tools: Network Tab,Performance Tab
+3. Stress/Load Testing Tools: JMeter or LoadRunner
+
+3. Suggest 3 potential root causes for this problem.
+1.Inefficient Data Retrieval: The API endpoint providing data to the charts executes a slow. This causes the API request to time out.
+2.Client-Side Rendering Overload: The chart library is attempting to render an excessively large number of data points directly in the browser DOM.
+3.Infinite Loop in Chart Logic: A bug in the chart's JavaScript code it causes the browser's memory usage to spike rapidly and leading to a crash.
+
+4. Write one clear bug report example for this issue.
+Title: Dashboard chart not loading and freezing page
+Description: The Monthly Sales Trend chart fails to load for high-data users and causes the dashboard page to freeze.
+Steps to Reproduce:
+1.Log in with a high-volume data user (user_id: 456).
+2.Go to /dashboard.
+3.Wait for the chart to load.
+Expected Result: Chart loads smoothly and displays data.
+Actual Result: Chart stays blank, page becomes unresponsive, and API call times out (504).
+Severity/Priority: Critical / P0
+
+
+

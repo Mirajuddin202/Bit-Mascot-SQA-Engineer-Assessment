@@ -1,0 +1,167 @@
+1.Describe positive and negative test cases.
+
+Test Case ID: TC-001	
+Test Case Title: Valid Credentials	
+Preconditions: user account exists
+Test Steps:
+1. Navigate to the Login Page.
+2. Enter the Email.
+3. Enter the Password.
+4. Click the "Login" button.	
+Test Data: Email: test@gmail.com Password: ValidPassword123	
+Expected Result: User is successfully to the dashboard	
+Actual Result: User logged in successfully
+Status: Pass
+
+Test Case ID:TC-002	
+Test Case Title: Successful Login	
+Preconditions: User account exists
+Test Steps:
+1. Navigate to the Login Page.
+2. Enter email.
+3. Enter minimum-length password.
+4. Click “Login”	
+Test Data: Email: test@gmail.com
+Password: MinPass8	
+Expected Result: User redirected to the dashboard.	
+Actual Result: Login successful	
+Status: pass
+
+Test Case ID:TC-003	
+Test Case Title: Forgot Password	
+Preconditions:Login page is opened
+Test Steps:
+1. Navigate to the Login Page.
+2. Click the "Forgot Password" link.	
+Test Data:	
+Expected Result:User is redirected to the password reset page	
+Actual Result:User successfully navigated to the “Reset Password” page	
+Status: Pass
+
+Test Case ID:TC-004	
+Test Case Title:Successful Login	
+Preconditions:User has changed password	
+Test Steps:
+1. Navigate to the Login Page.
+2. Enter email.
+3. Enter new password.
+4. Click “Login”.
+	
+Test Data:Email: test@gmail.com
+Password: NewValidPass1	
+Expected Result:User is authenticated using new password.	
+Actual Result:	User successfully logged
+Status:pass
+
+Test Case ID:TC-005	
+Test Case Title:Successful Login	
+Preconditions:User exists	
+Test Steps:
+1. Clear browser cache & cookies.
+2. Navigate to Login Page.
+3. Enter valid credentials.
+4. Click “Login”.	
+Test Data:Email: test@gmail.com
+Password: NewValidPass1	
+Expected Result:User logs in and a fresh session is created	
+Actual Result:Login successful	
+Status: pass
+
+Test Case ID:TC-006	
+Test Case Title:Negative Test case 1	
+Preconditions:Login page is opened	
+Test Steps:
+1. Navigate to Login Page.
+2. Enter an invalid email format.
+3. Enter a valid password.
+4. Click "Login".	
+Test Data:Email: test@gmail.com
+Password: ValidPassword123	
+Expected Result:Please enter a valid email address	
+Actual Result:login not successfully	
+Status: Fail
+
+Test Case ID:TC-007	
+Test Case Title: Negative Test case 2	
+Preconditions: Login page is opened	
+Test Steps:
+1. Navigate to Login Page.
+2. Enter valid email.
+3. Enter a 7-character password.
+4. Click "Login".	
+Test Data: Email: Email: test@gmail.com
+Password: ShortP7	
+Expected Result: Password must be at least 8 characters	
+Actual Result: login not successfully
+Status: Fail
+
+Test Case ID:TC-008	
+Test Case Title: Negative Test case 3
+Preconditions: user account exists.	
+Test Steps:
+1. Navigate to Login Page.
+2. Enter correct email.
+3. Enter wrong password.
+4. Click “Login”.	
+Test Data: Email: test@gmail.com
+Password: IncorrectPass1	
+Expected Result: Invalid email or password	
+Actual Result: login not successfully	
+Status: Fail
+
+Test Case ID:TC-009	
+Test Case Title: Negative Test case 4	
+Preconditions: account exists but is locked.	
+Test Steps:
+1. Navigate to Login Page.
+2. Enter email of locked account.
+3. Enter correct password.
+4. Click “Login”.	
+Test Data: Email: test@gmail.com
+Password: LockedUser123	
+Expected Result: Your account has been locked	
+Actual Result: login was not allowed	
+Status: Fail
+
+Test Case ID:TC-010	
+Test Case Title: Negative Test case 5	
+Preconditions: Login page is opened	
+Test Steps:
+1. Navigate to Login Page.
+2. Leave Email empty.
+3. Leave Password empty.
+4. Click “Login”.	
+Test Data: Email: (Empty)
+Password: (Empty)	
+Expected Result: Email and password is required	
+Actual Result: required field errors	
+Status: Fail
+
+2.Identify any missing edge cases that might cause issues in production.
+1.Email case sensitivity
+2.Injection attempts (SQL/Script Injection)
+3.Brute-force attempts / rate limiting
+4. Special Characters Handling
+5. Login with Expired Password
+
+3.Explain why each test case is important.
+TC-001: Valid Credentials
+Checks the main login flow. If this fails, users cannot access the system.
+TC-002: Minimum Password Login
+Validates boundary conditions for password rules.
+TC-003: Forgot Password
+Ensures users can recover access when they forget their password.
+TC-004: Login After Password Change
+Confirms the system accepts updated passwords and rejects old ones.
+TC-005: Login After Clearing Session
+Verifies fresh session creation works after cache/cookie reset.
+TC-006: Invalid Email Format
+Ensures proper form validation and reduces invalid backend requests.
+TC-007: Password Too Short
+Checks enforcement of password length requirements.
+TC-008: Wrong Password
+Ensures incorrect credentials are rejected for security.
+TC-009: Locked/Disabled Account
+Verifies account lockout mechanisms prevent unauthorized access.
+TC-010: Empty Fields
+Confirms required field validation works before submitting the form.

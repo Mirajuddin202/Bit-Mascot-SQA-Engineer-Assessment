@@ -1,0 +1,73 @@
+1. Write Test Scenarios You Would Perform Manually
+
+Test Scenarios 01:Standard Successful Order
+Test Case 01: 
+Verify that a valid, authenticated user can successfully place an order with correct product details and a valid coupon.
+
+Precondition: 
+Valid auth token is included in the request header. Product exists and is in stock.
+
+Request Body: 
+{ "productId": 101, "quantity": 2, "coupon": "DISCOUNT10" }
+
+Expected Result:
+200 OK with a valid orderId (555) and the correct total (900).
+
+Test Scenarios 02:Order Without Coupon
+Test Case 01: 
+Verify that an order can be placed successfully even when the optional coupon field is not provided.
+
+Precondition: 
+Valid auth token and Product is available.
+
+Request Body: 
+{ "productId": 101, "quantity": 2 }
+
+Expected Result:
+200 OK with a valid orderId and a total calculated without any discount.
+
+Test Scenarios 03: Unauthorized Access
+Test Case 01: 
+Verify that the API blocks order creation when no valid authentication token is provided.
+
+Precondition: 
+Remove or invalidate the Authorization token in the request header.
+Request Body: 
+{ "productId": 101, "quantity": 2, "coupon": "DISCOUNT10" }
+
+Expected Result:
+401 Unauthorized with response body: { "error": "Login required" }. This directly tests the documented 401 response.
+
+2. Describe One Negative Test Case That is Not Obvious
+Non-Obvious Negative Test Case: Product Stock Race Condition
+1.Test Case: An authenticated user attempts to place an order for a product where the available stock is exactly equal to the requested quantity. Immediately before the order is finalized.
+2.Expected Result: Only one of the two requests should succeed with a 200 OK. The other request must fail with a 400 Bad Request.
+
+
+3. How Would You Verify the Coupon Calculation is Correct?
+
+1.Pre-Calculation: Determine the expected final total price before sending the API request.
+
+Retrieve Base Data: Get the base price of productId: 101 ($500).
+Calculate Subtotal: Multiply the base price by the requested quantity: $500 * 2 = $1000.
+Apply Coupon Logic: Independently apply the rules for DISCOUNT 10%: $1000 * 0.10 = $100 discount.
+Calculate Expected Total: $1000 - $100 = $900.
+
+2.API Execution: Send the request: { "productId": 101, "quantity": 2, "coupon": "DISCOUNT10" }.
+
+3.Post-Execution Verification:
+Verify the HTTP status code is 200 OK.
+Compare the returned total value (900) against the pre-calculated expected value ($900).
+
+4. How Would You Report a Bug if the Total Price Calculation is Wrong?
+
+Title: Incorrect total price when applying DISCOUNT10 coupon
+Description: The API applies the wrong discount percentage. Instead of 10%, only 5% is applied.
+Steps to Reproduce:
+1.Use productId 101 (price $500).
+2.Apply coupon DISCOUNT10.
+3.Send POST request:{ "productId": 101, "quantity": 2, "coupon": "DISCOUNT10" }
+4.Check the total value in the response.
+Expected Result: Total should be $900 after applying 10% discount.
+Actual Result: API returns $950.
+Severity/Priority: High / critical
