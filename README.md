@@ -26,4 +26,40 @@ Steps performed:
 1. Playwright (JavaScript)
 2. Chromium / WebKit / Firefox 
 3. Node.js
+
+## Output
+<img width="1057" height="712" alt="Screenshot 2025-11-15 233510" src="https://github.com/user-attachments/assets/ead010cb-6111-4581-b65e-624112291aa8" />
+
 ---
+### 1️⃣ Clone the repository
+```bash
+git clone https://github.com/Mirajuddin202/Bit-Mascot-SQA-Engineer-Assessment.git
+cd Bit-Mascot-SQA-Engineer-Assessment
+```
+
+---
+
+### 2️⃣ Install project dependencies
+```bash
+npm install
+```
+
+---
+
+### 3️⃣ Install Playwright browsers
+```bash
+npm init playwright@latest
+```
+---
+
+### 4️⃣ Run the test suite (headless mode)
+```bash
+npx playwright test
+```
+---
+
+### 5️⃣ Run tests in headed mode (visible browser)
+```bash
+npx playwright test --headed
+```
+
